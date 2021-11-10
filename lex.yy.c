@@ -496,12 +496,12 @@ char *yytext;
     #include <stdlib.h>
     #include <string.h>
 
-    //#include "sintactico.tab.h"
+    #include "sintactico.tab.h"
 
     int lineno = 1; // initialize to 1
     
-    void ret_print(char *tipo_token);
-    void yyerror();
+    //void ret_print(char *tipo_token);
+    //void yyerror();
 
 #line 507 "lex.yy.c"
 
@@ -686,7 +686,7 @@ YY_DECL
 	register char *yy_cp, *yy_bp;
 	register int yy_act;
     
-#line 17 "lexico.l"
+#line 20 "lexico.l"
 
 
 #line 693 "lex.yy.c"
@@ -775,7 +775,7 @@ do_action:	/* This label is used only to access EOF actions. */
 case 1:
 /* rule 1 can match eol */
 YY_RULE_SETUP
-#line 19 "lexico.l"
+#line 22 "lexico.l"
 { lineno += 1; }
 	YY_BREAK
 case 2:
@@ -783,7 +783,7 @@ case 2:
 (yy_c_buf_p) = yy_cp -= 1;
 YY_DO_BEFORE_ACTION; /* set up yytext again */
 YY_RULE_SETUP
-#line 21 "lexico.l"
+#line 24 "lexico.l"
 printf("%s es una palabra reservada\n", yytext);
 	YY_BREAK
 case 3:
@@ -791,7 +791,7 @@ case 3:
 (yy_c_buf_p) = yy_cp -= 1;
 YY_DO_BEFORE_ACTION; /* set up yytext again */
 YY_RULE_SETUP
-#line 22 "lexico.l"
+#line 25 "lexico.l"
 printf("%s es una palabra reservada\n", yytext);
 	YY_BREAK
 case 4:
@@ -799,7 +799,7 @@ case 4:
 (yy_c_buf_p) = yy_cp -= 1;
 YY_DO_BEFORE_ACTION; /* set up yytext again */
 YY_RULE_SETUP
-#line 23 "lexico.l"
+#line 26 "lexico.l"
 printf("%s es una palabra reservada\n", yytext);
 	YY_BREAK
 case 5:
@@ -807,7 +807,7 @@ case 5:
 (yy_c_buf_p) = yy_cp -= 1;
 YY_DO_BEFORE_ACTION; /* set up yytext again */
 YY_RULE_SETUP
-#line 24 "lexico.l"
+#line 27 "lexico.l"
 printf("%s es una palabra reservada\n", yytext);
 	YY_BREAK
 case 6:
@@ -815,7 +815,7 @@ case 6:
 (yy_c_buf_p) = yy_cp -= 1;
 YY_DO_BEFORE_ACTION; /* set up yytext again */
 YY_RULE_SETUP
-#line 25 "lexico.l"
+#line 28 "lexico.l"
 printf("%s es una palabra reservada\n", yytext);
 	YY_BREAK
 case 7:
@@ -823,7 +823,7 @@ case 7:
 (yy_c_buf_p) = yy_cp -= 1;
 YY_DO_BEFORE_ACTION; /* set up yytext again */
 YY_RULE_SETUP
-#line 27 "lexico.l"
+#line 30 "lexico.l"
 printf("%s es un identificador\n", yytext);
 	YY_BREAK
 case 8:
@@ -831,7 +831,7 @@ case 8:
 (yy_c_buf_p) = yy_cp -= 1;
 YY_DO_BEFORE_ACTION; /* set up yytext again */
 YY_RULE_SETUP
-#line 29 "lexico.l"
+#line 32 "lexico.l"
 printf("%s es una constante entera\n", yytext);
 	YY_BREAK
 case 9:
@@ -839,7 +839,7 @@ case 9:
 (yy_c_buf_p) = yy_cp -= 1;
 YY_DO_BEFORE_ACTION; /* set up yytext again */
 YY_RULE_SETUP
-#line 31 "lexico.l"
+#line 34 "lexico.l"
 printf("%s es un simbolo\n", yytext);
 	YY_BREAK
 case 10:
@@ -847,7 +847,7 @@ case 10:
 (yy_c_buf_p) = yy_cp -= 1;
 YY_DO_BEFORE_ACTION; /* set up yytext again */
 YY_RULE_SETUP
-#line 32 "lexico.l"
+#line 35 "lexico.l"
 printf("%s es un simbolo\n", yytext);
 	YY_BREAK
 case 11:
@@ -855,7 +855,7 @@ case 11:
 (yy_c_buf_p) = yy_cp -= 1;
 YY_DO_BEFORE_ACTION; /* set up yytext again */
 YY_RULE_SETUP
-#line 33 "lexico.l"
+#line 36 "lexico.l"
 printf("%s es un simbolo\n", yytext);
 	YY_BREAK
 case 12:
@@ -863,33 +863,33 @@ case 12:
 (yy_c_buf_p) = yy_cp -= 1;
 YY_DO_BEFORE_ACTION; /* set up yytext again */
 YY_RULE_SETUP
-#line 34 "lexico.l"
+#line 37 "lexico.l"
 printf("%s es un simbolo\n", yytext);
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 35 "lexico.l"
+#line 38 "lexico.l"
 ; /* ignora espacios */
 	YY_BREAK
 case 14:
 /* rule 14 can match eol */
 YY_RULE_SETUP
-#line 36 "lexico.l"
+#line 39 "lexico.l"
 { lineno += 1; }
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 37 "lexico.l"
+#line 40 "lexico.l"
 /*Borra espacio en blanco */
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
-#line 39 "lexico.l"
+#line 42 "lexico.l"
 printf(" ");
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
-#line 40 "lexico.l"
+#line 43 "lexico.l"
 ECHO;
 	YY_BREAK
 #line 896 "lex.yy.c"
@@ -1890,14 +1890,14 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 40 "lexico.l"
+#line 43 "lexico.l"
 
 
 
 
 
 
-
+/*
 void ret_print(char *tipo_token){
     printf("yytext: %s\ttoken: %s\tlineno: %d\n", yytext, tipo_token, lineno);
 }
@@ -1913,4 +1913,4 @@ int main(int argc, char *argv[]){
     return 0;
 }
 
-
+*/

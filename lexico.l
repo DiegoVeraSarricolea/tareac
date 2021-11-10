@@ -4,15 +4,18 @@
     #include <stdlib.h>
     #include <string.h>
 
-    //#include "sintactico.tab.h"
+    #include "sintactico.tab.h"
 
     int lineno = 1; // initialize to 1
     
-    void ret_print(char *tipo_token);
-    void yyerror();
+    //void ret_print(char *tipo_token);
+    //void yyerror();
 %}
 
 %x ML_COMMENT
+
+ID          [A-Z]([a-z]*[0-9]+)*
+ENTERO      [0-9]+
 
 %%
 
@@ -42,7 +45,7 @@
 
 
 
-
+/*
 void ret_print(char *tipo_token){
     printf("yytext: %s\ttoken: %s\tlineno: %d\n", yytext, tipo_token, lineno);
 }
@@ -58,3 +61,4 @@ int main(int argc, char *argv[]){
     return 0;
 }
 
+*/
