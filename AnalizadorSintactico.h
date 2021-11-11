@@ -44,7 +44,7 @@
      DIBUJAR = 260,
      LINEA = 261,
      REDONDO = 262,
-     CUADRADO = 263,
+     CUADRO = 263,
      TRIANGULO = 264,
      COLOR = 265,
      RELLENO = 266,
@@ -69,7 +69,7 @@
 #define DIBUJAR 260
 #define LINEA 261
 #define REDONDO 262
-#define CUADRADO 263
+#define CUADRO 263
 #define TRIANGULO 264
 #define COLOR 265
 #define RELLENO 266

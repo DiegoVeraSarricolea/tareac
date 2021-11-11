@@ -71,7 +71,7 @@
      DIBUJAR = 260,
      LINEA = 261,
      REDONDO = 262,
-     CUADRADO = 263,
+     CUADRO = 263,
      TRIANGULO = 264,
      COLOR = 265,
      RELLENO = 266,
@@ -96,7 +96,7 @@
 #define DIBUJAR 260
 #define LINEA 261
 #define REDONDO 262
-#define CUADRADO 263
+#define CUADRO 263
 #define TRIANGULO 264
 #define COLOR 265
 #define RELLENO 266
@@ -495,9 +495,9 @@ static const yytype_uint8 yyrline[] =
 static const char *const yytname[] =
 {
   "$end", "error", "$undefined", "ENTERO", "ID", "DIBUJAR", "LINEA",
-  "REDONDO", "CUADRADO", "TRIANGULO", "COLOR", "RELLENO", "ASIGNAR", "FIN",
+  "REDONDO", "CUADRO", "TRIANGULO", "COLOR", "RELLENO", "ASIGNAR", "FIN",
   "AZUL", "AMARILLO", "ROJO", "VERDE", "BLANCO", "SI", "NO", "PARA",
-  "PARC", "COMA", "IGUAL", "$accept", "s", "INST", "LINEAR", "CUADRADOR",
+  "PARC", "COMA", "IGUAL", "$accept", "s", "INST", "LINEAR", "CUADROR",
   "REDONDOR", "TRIANGULOR", "COLORR", "RELLENOR", "ASIGNARR", "E",
   "FINALIZAR", "var", "constante", 0
 };

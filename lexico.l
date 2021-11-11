@@ -28,7 +28,7 @@ ENTERO      [0-9][0-9]*
 "linea" {return (LINEA);}
 "redondo" {return (REDONDO);}
 "asignar" {return (ASIGNAR);}
-"cuadrado" {return (CUADRADO);}
+"cuadro" {return (CUADRO);}
 "triangulo" {return (TRIANGULO);}
 "color" {return (COLOR);}
 "relleno" {return (RELLENO);}
