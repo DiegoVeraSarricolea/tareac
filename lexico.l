@@ -4,7 +4,7 @@
     #include <stdlib.h>
     #include <string.h>
 
-    #include "sintactico.tab.h"
+    #include "AnalizadorSintactico.h"
 
     int lineno = 1; // initialize to 1
     
@@ -15,31 +15,40 @@
 %x ML_COMMENT
 
 ID          [A-Z]([a-z]*[0-9]+)*
-ENTERO      [0-9]+
+ENTERO      [0-9][0-9]*
 
 %%
 
+{ID} {return (ID);}
+{ENTERO} {yylval.numero=atoi(yytext); return(ENTERO);}
+
 <ML_COMMENT>"\n"        { lineno += 1; }
 
-"dibujar"$	        		printf("%s es una palabra reservada\n", yytext);
-"linea"$				printf("%s es una palabra reservada\n", yytext);
-"redondo"$				printf("%s es una palabra reservada\n", yytext);
-"asignar"$				printf("%s es una palabra reservada\n", yytext);
-"fin"$				printf("%s es una palabra reservada\n", yytext);
+"dibujar" {return (DIBUJAR);}
+"linea" {return (LINEA);}
+"redondo" {return (REDONDO);}
+"asignar" {return (ASIGNAR);}
+"cuadrado" {return (CUADRADO);}
+"triangulo" {return (TRIANGULO);}
+"color" {return (COLOR);}
+"relleno" {return (RELLENO);}
+"fin" {return (FIN);}
+"azul" {return (AZUL);}
+"amarillo" {return (AMARILLO);}
+"rojo" {return (ROJO);}
+"verde" {return (VERDE);}
+"blanco" {return (BLANCO);}
+"si" {return (SI);}
+"no" {return (NO);}
 
-([A-Z]([a-z]*[0-9]+)*)$		printf("%s es un identificador\n", yytext);
-
-([0-9][0-9]*)$			printf("%s es una constante entera\n", yytext);
-
-"("$					printf("%s es un simbolo\n", yytext);
-")"$					printf("%s es un simbolo\n", yytext);
-","$					printf("%s es un simbolo\n", yytext);
-"="$					printf("%s es un simbolo\n", yytext);
+"(" {return (PARA);}
+")" {return (PARC);}
+"," { return (COMA);}
+"=" {return (IGUAL);}
 [ \t] ; /* ignora espacios */
 "\n"            { lineno += 1; }
 [ \t\r\f]+          /*Borra espacio en blanco */
 
-.					printf(" ");
 %%
 
 
