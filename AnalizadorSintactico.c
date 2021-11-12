@@ -169,7 +169,7 @@ typedef union YYSTYPE
 /* Line 193 of yacc.c.  */
 #line 171 "AnalizadorSintactico.c"
 	YYSTYPE;
-# define yystype YYSTYPE /* obsolescent; will be withdrawn */
+# define yystype YYSTYPE /* obsolescent; will be withdrivern */
 # define YYSTYPE_IS_DECLARED 1
 # define YYSTYPE_IS_TRIVIAL 1
 #endif

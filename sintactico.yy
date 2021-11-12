@@ -1,15 +1,32 @@
-%{
+
+%skeleton "lalr1.cc" /* -*- C++ -*- */
+%require "3.0.2"
+%defines
+%define api.parser.class {trayect_parser}
+%define api.token.constructor
+%define api.namespace {yy}
+%define api.value.type variant
+%define parse.assert
+%code requires
+
+{
 
 /********************** 
  * Declaraciones en C *
  **********************/
+  
+
 
  //Importacion de librerias
   #include <stdio.h>
   #include <stdlib.h>
   #include <math.h>
+  #include <utility> 
+  #include <vector>
   #include "string.h"
+  #include "miniwin.h"
   
+  class trayect_driver;
 
   extern int yylex(void);
   extern char *yytext;
@@ -18,20 +35,31 @@
   //Declaracion de metodos 
   void yyerror(char *s);
 
-%}
+}
+
+%param { trayect_driver& driver }
+%locations
+%define parse.trace
+%define parse.error verbose
+%code
+{
+#include "driver.h"
+#include <iostream>
+
+int posx,posy;
+std::vector<std::pair<std::string, float> > v;
+std::vector<std::pair<std::string, std::string> > cl;
+}
+%define api.token.prefix {TOK}
 
 /*************************
   Declaraciones de Bison *
  *************************/
-%union
-{
-  int numero;
-  char* texto;
-}
+
 
 /*Declaración de tokens*/
-%token <numero> ENTERO
-%token <texto> ID
+%token <float> ENTERO
+%token <std::string> ID
 %token DIBUJAR
 %token LINEA
 %token REDONDO
@@ -40,7 +68,6 @@
 %token COLOR
 %token RELLENO
 %token ASIGNAR
-%token FIN
 %token AZUL
 %token AMARILLO
 %token ROJO
@@ -48,6 +75,7 @@
 %token BLANCO
 %token SI
 %token NO
+%token FIN 0 "eof"
 
 %token PARA
 %token PARC
@@ -55,8 +83,8 @@
 %token IGUAL
 
 
-%type <numero> constante
-%type <texto> var
+%type <float> constante
+%type <std::string> var
 %start s
 
 %%
@@ -132,14 +160,10 @@ constante: ENTERO { $$ = $1;}
 /**********************
  * Codigo C Adicional *
  **********************/
-void yyerror(char *s)
-{
-	printf("Error sintactico %s \n",s);
-}
 
-int main(int argc,char **argv) //Programa Principal
+void yy::trayect_parser::error(const location_type& lugar, const std::string& lexema)
 {
-	yyparse(); //funcion propio de bison que ejecuta el analizador sintactico
-
-	return 0;
+  std::cout << "Error Sintactico " << lexema << std::endl;
+  exit(0);
+  
 }
