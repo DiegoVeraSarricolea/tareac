@@ -34,6 +34,25 @@
 
   //Declaracion de metodos 
   void yyerror(char *s);
+  void dibujaLinea();
+  void dibujaCuadro();
+  void dibujaRedondo();
+  void dibujaTriangulo();
+  void guardaColor();
+  void guardaAzul();
+  void guardaAmarillo();
+  void guardaBlanco();
+  void guardaRojo();
+  void guardaVerde();
+  void guardaRelleno();
+  void guardaSi();
+  void guardaNo();
+  void asignaAzul();
+  void asignaAmarillo();
+  void asignaBlanco();
+  void asignaRojo();
+  void asignaVerde();
+  void asignaConstante();
 
 }
 
@@ -108,39 +127,39 @@ INST:   INST INST |
         ;
 
 
-LINEAR: LINEA PARA E COMA E COMA E COMA E PARC
+LINEAR: LINEA PARA E COMA E COMA E COMA E PARC {dibujaLinea();}
         ;
 
-CUADROR: CUADRO PARA E COMA E COMA E COMA E PARC
+CUADROR: CUADRO PARA E COMA E COMA E COMA E PARC {dibujaCuadro();}
         ;
 
-REDONDOR: REDONDO PARA E COMA E COMA E PARC
+REDONDOR: REDONDO PARA E COMA E COMA E PARC {dibujaRedondo();}
         ;
 
-TRIANGULOR: TRIANGULO PARA E COMA E COMA E COMA E COMA E COMA E PARC
+TRIANGULOR: TRIANGULO PARA E COMA E COMA E COMA E COMA E COMA E PARC {dibujaTriangulo();}
         ;
 
-COLORR: COLOR PARA var PARA |
-        COLOR PARA AZUL PARC |
-        COLOR PARA AMARILLO PARC |
-        COLOR PARA ROJO PARC |
-        COLOR PARA VERDE PARC |
-        COLOR PARA BLANCO PARC
+COLORR: COLOR PARA var PARA {guardaColor();} |
+        COLOR PARA AZUL PARC {guardaAzul();} |
+        COLOR PARA AMARILLO PARC {guardaAmarillo();} |
+        COLOR PARA ROJO PARC {guardaRojo();} |
+        COLOR PARA VERDE PARC {guardaVerde();} |
+        COLOR PARA BLANCO PARC {guardaBlanco();}
         ;
 
-RELLENOR: RELLENO PARA var PARC |
-        RELLENO PARA SI PARC |
-        RELLENO PARA NO PARC
+RELLENOR: RELLENO PARA var PARC {guardaRelleno();} |
+        RELLENO PARA SI PARC {guardaSi();} |
+        RELLENO PARA NO PARC {guardaNo();}
         ;
 
-ASIGNARR: ASIGNAR var IGUAL AZUL |
-        ASIGNAR var IGUAL AMARILLO |
-        ASIGNAR var IGUAL ROJO |
-        ASIGNAR var IGUAL VERDE |
-        ASIGNAR var IGUAL BLANCO |
-        ASIGNAR var IGUAL SI |
-        ASIGNAR var IGUAL NO |
-        ASIGNAR var IGUAL constante
+ASIGNARR: ASIGNAR var IGUAL AZUL {asignaAzul();} |
+        ASIGNAR var IGUAL AMARILLO {asignaAmarillo();} |
+        ASIGNAR var IGUAL ROJO {asignaRojo();} |
+        ASIGNAR var IGUAL VERDE {asignaVerde();} |
+        ASIGNAR var IGUAL BLANCO {asignaBlanco();} |
+        ASIGNAR var IGUAL SI {asignaSi();} |
+        ASIGNAR var IGUAL NO {asignaNo();} |
+        ASIGNAR var IGUAL constante {asignaConstante();}
         ;
 
 E: var | constante
@@ -163,7 +182,7 @@ constante: ENTERO { $$ = $1;}
 
 void yy::trayect_parser::error(const location_type& lugar, const std::string& lexema)
 {
-  std::cout << "Error Sintactico " << lexema << std::endl;
-  exit(0);
+        std::cout << "Error Sintactico " << lexema << std::endl;
+        exit(0);
   
 }
