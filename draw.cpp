@@ -1,7 +1,7 @@
-#include "driver.h"
+#include "draw.h"
 #include "sintactico.tab.hh"
 
-int trayect_driver::parse(const std::string& archivo)
+int trayect_draw::parse(const std::string& archivo)
 {
   file = archivo;
   iniciarScanner();

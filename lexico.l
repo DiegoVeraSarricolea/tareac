@@ -4,7 +4,7 @@
     #include <stdio.h>
     #include <stdlib.h>
     #include <string.h>
-    #include "driver.h"
+    #include "draw.h"
     #include "sintactico.tab.hh"
     #undef yywrap
     #define yywrap() 1
@@ -22,12 +22,12 @@
 %x ML_COMMENT
 
 ID          [A-Z]([a-z]*[0-9]+)*
-ENTERO      [0-9][0-9]*
+NUMERO      [0-9][0-9]*
 DELIMITADOR [\t\r\f" "]
 
 %%
 
-{ENTERO}    {return yy::trayect_parser::make_ENTERO(strtol(yytext, NULL, 10),loc);}
+{NUMERO}    {return yy::trayect_parser::make_NUMERO(strtol(yytext, NULL, 10),loc);}
 {ID}        {return yy::trayect_parser::make_ID(yytext,loc);}
 
 <ML_COMMENT>"\n"        { lineno += 1; }
@@ -35,7 +35,7 @@ DELIMITADOR [\t\r\f" "]
 "dibujar" {return yy::trayect_parser::make_DIBUJAR(loc);}
 "linea" {return yy::trayect_parser::make_LINEA(loc);}
 "redondo" {return yy::trayect_parser::make_REDONDO(loc);}
-"asignar" {return yy::trayect_parser::make_ASIGNAR(loc);}
+
 "cuadro" {return yy::trayect_parser::make_CUADRO(loc);}
 "triangulo" {return yy::trayect_parser::make_TRIANGULO(loc);}
 "color" {return yy::trayect_parser::make_COLOR(loc);}
@@ -63,12 +63,12 @@ DELIMITADOR [\t\r\f" "]
 %%
 
 
-void trayect_driver::iniciarScanner()
+void trayect_draw::iniciarScanner()
 {
   yy_flex_debug = false;
   yyin = stdin;
 }
-void trayect_driver::terminarScanner()
+void trayect_draw::terminarScanner()
 {
   fclose(yyin);
 }

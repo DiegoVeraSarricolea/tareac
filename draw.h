@@ -1,12 +1,12 @@
-#ifndef DRIVER
-# define DRIVER
+#ifndef DRAW
+# define DRAW
 # include <string>
 # include "sintactico.tab.hh"
 #define YY_DECL \
-yy::trayect_parser::symbol_type yylex (trayect_driver& driver)
+yy::trayect_parser::symbol_type yylex (trayect_draw& draw)
 YY_DECL;
 
-class trayect_driver
+class trayect_draw
 {
 public:
   float resultado;

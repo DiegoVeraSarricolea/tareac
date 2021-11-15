@@ -41,12 +41,12 @@
 
 
 // Unqualified %code blocks.
-#line 45 "sintactico.yy"
+#line 64 "sintactico.yy"
 
-#include "driver.h"
+#include "draw.h"
 #include <iostream>
 
-int posx,posy;
+std::string rellenar = "no";
 std::vector<std::pair<std::string, float> > v;
 std::vector<std::pair<std::string, std::string> > cl;
 
@@ -187,14 +187,14 @@ namespace yy {
 
 
   /// Build a parser object.
-  trayect_parser::trayect_parser (trayect_driver& driver_yyarg)
+  trayect_parser::trayect_parser (trayect_draw& draw_yyarg)
 #if YYDEBUG
     : yydebug_ (false),
       yycdebug_ (&std::cerr),
 #else
     :
 #endif
-      driver (driver_yyarg)
+      draw (draw_yyarg)
   {}
 
   trayect_parser::~trayect_parser ()
@@ -252,13 +252,21 @@ namespace yy {
   {
     switch (that.type_get ())
     {
-      case 3: // ENTERO
-      case 37: // constante
+      case 3: // NUMERO
+      case 25: // INST
+      case 26: // LINEAR
+      case 27: // CUADROR
+      case 28: // REDONDOR
+      case 29: // TRIANGULOR
+      case 30: // COLORR
+      case 31: // RELLENOR
+      case 32: // E
+      case 34: // constante
         value.YY_MOVE_OR_COPY< float > (YY_MOVE (that.value));
         break;
 
       case 4: // ID
-      case 36: // var
+      case 33: // var
         value.YY_MOVE_OR_COPY< std::string > (YY_MOVE (that.value));
         break;
 
@@ -277,13 +285,21 @@ namespace yy {
   {
     switch (that.type_get ())
     {
-      case 3: // ENTERO
-      case 37: // constante
+      case 3: // NUMERO
+      case 25: // INST
+      case 26: // LINEAR
+      case 27: // CUADROR
+      case 28: // REDONDOR
+      case 29: // TRIANGULOR
+      case 30: // COLORR
+      case 31: // RELLENOR
+      case 32: // E
+      case 34: // constante
         value.move< float > (YY_MOVE (that.value));
         break;
 
       case 4: // ID
-      case 36: // var
+      case 33: // var
         value.move< std::string > (YY_MOVE (that.value));
         break;
 
@@ -302,13 +318,21 @@ namespace yy {
     state = that.state;
     switch (that.type_get ())
     {
-      case 3: // ENTERO
-      case 37: // constante
+      case 3: // NUMERO
+      case 25: // INST
+      case 26: // LINEAR
+      case 27: // CUADROR
+      case 28: // REDONDOR
+      case 29: // TRIANGULOR
+      case 30: // COLORR
+      case 31: // RELLENOR
+      case 32: // E
+      case 34: // constante
         value.copy< float > (that.value);
         break;
 
       case 4: // ID
-      case 36: // var
+      case 33: // var
         value.copy< std::string > (that.value);
         break;
 
@@ -326,13 +350,21 @@ namespace yy {
     state = that.state;
     switch (that.type_get ())
     {
-      case 3: // ENTERO
-      case 37: // constante
+      case 3: // NUMERO
+      case 25: // INST
+      case 26: // LINEAR
+      case 27: // CUADROR
+      case 28: // REDONDOR
+      case 29: // TRIANGULOR
+      case 30: // COLORR
+      case 31: // RELLENOR
+      case 32: // E
+      case 34: // constante
         value.move< float > (that.value);
         break;
 
       case 4: // ID
-      case 36: // var
+      case 33: // var
         value.move< std::string > (that.value);
         break;
 
@@ -522,7 +554,7 @@ namespace yy {
         try
 #endif // YY_EXCEPTIONS
           {
-            symbol_type yylookahead (yylex (driver));
+            symbol_type yylookahead (yylex (draw));
             yyla.move (yylookahead);
           }
 #if YY_EXCEPTIONS
@@ -586,13 +618,21 @@ namespace yy {
          when using variants.  */
       switch (yyr1_[yyn])
     {
-      case 3: // ENTERO
-      case 37: // constante
+      case 3: // NUMERO
+      case 25: // INST
+      case 26: // LINEAR
+      case 27: // CUADROR
+      case 28: // REDONDOR
+      case 29: // TRIANGULOR
+      case 30: // COLORR
+      case 31: // RELLENOR
+      case 32: // E
+      case 34: // constante
         yylhs.value.emplace< float > ();
         break;
 
       case 4: // ID
-      case 36: // var
+      case 33: // var
         yylhs.value.emplace< std::string > ();
         break;
 
@@ -616,26 +656,152 @@ namespace yy {
         {
           switch (yyn)
             {
-  case 34:
-#line 149 "sintactico.yy"
-               {exit (-1);}
-#line 623 "sintactico.tab.cc"
+  case 3:
+#line 134 "sintactico.yy"
+        { yylhs.value.as < float > () = yystack_[1].value.as < float > (); }
+#line 663 "sintactico.tab.cc"
     break;
 
-  case 35:
-#line 152 "sintactico.yy"
+  case 4:
+#line 135 "sintactico.yy"
+        { yylhs.value.as < float > () = yystack_[0].value.as < float > (); }
+#line 669 "sintactico.tab.cc"
+    break;
+
+  case 5:
+#line 136 "sintactico.yy"
+        { yylhs.value.as < float > () = yystack_[0].value.as < float > (); }
+#line 675 "sintactico.tab.cc"
+    break;
+
+  case 6:
+#line 137 "sintactico.yy"
+        { yylhs.value.as < float > () = yystack_[0].value.as < float > (); }
+#line 681 "sintactico.tab.cc"
+    break;
+
+  case 7:
+#line 138 "sintactico.yy"
+        { yylhs.value.as < float > () = yystack_[0].value.as < float > (); }
+#line 687 "sintactico.tab.cc"
+    break;
+
+  case 8:
+#line 139 "sintactico.yy"
+        { yylhs.value.as < float > () = yystack_[0].value.as < float > (); }
+#line 693 "sintactico.tab.cc"
+    break;
+
+  case 9:
+#line 140 "sintactico.yy"
+        { yylhs.value.as < float > () = yystack_[0].value.as < float > (); }
+#line 699 "sintactico.tab.cc"
+    break;
+
+  case 10:
+#line 145 "sintactico.yy"
+                                               {dibujaLinea(yystack_[7].value.as < float > (),yystack_[5].value.as < float > (),yystack_[3].value.as < float > (),yystack_[1].value.as < float > ());}
+#line 705 "sintactico.tab.cc"
+    break;
+
+  case 11:
+#line 148 "sintactico.yy"
+                                                 {dibujaCuadro(yystack_[7].value.as < float > (),yystack_[5].value.as < float > (),yystack_[3].value.as < float > (),yystack_[1].value.as < float > ());}
+#line 711 "sintactico.tab.cc"
+    break;
+
+  case 12:
+#line 151 "sintactico.yy"
+                                            {dibujaRedondo(yystack_[5].value.as < float > (),yystack_[3].value.as < float > (),yystack_[1].value.as < float > ());}
+#line 717 "sintactico.tab.cc"
+    break;
+
+  case 13:
+#line 154 "sintactico.yy"
+                                                                     {dibujaTriangulo(yystack_[11].value.as < float > (),yystack_[9].value.as < float > (),yystack_[7].value.as < float > (),yystack_[5].value.as < float > (),yystack_[3].value.as < float > (),yystack_[1].value.as < float > ());}
+#line 723 "sintactico.tab.cc"
+    break;
+
+  case 14:
+#line 157 "sintactico.yy"
+                           {guardaColor(yystack_[1].value.as < std::string > ());}
+#line 729 "sintactico.tab.cc"
+    break;
+
+  case 15:
+#line 158 "sintactico.yy"
+                             {guardaAzul();}
+#line 735 "sintactico.tab.cc"
+    break;
+
+  case 16:
+#line 159 "sintactico.yy"
+                                 {guardaAmarillo();}
+#line 741 "sintactico.tab.cc"
+    break;
+
+  case 17:
+#line 160 "sintactico.yy"
+                             {guardaRojo();}
+#line 747 "sintactico.tab.cc"
+    break;
+
+  case 18:
+#line 161 "sintactico.yy"
+                              {guardaVerde();}
+#line 753 "sintactico.tab.cc"
+    break;
+
+  case 19:
+#line 162 "sintactico.yy"
+                               {guardaBlanco();}
+#line 759 "sintactico.tab.cc"
+    break;
+
+  case 20:
+#line 165 "sintactico.yy"
+                               {guardaRelleno(yystack_[1].value.as < std::string > ());}
+#line 765 "sintactico.tab.cc"
+    break;
+
+  case 21:
+#line 166 "sintactico.yy"
+                             {guardaBoolean("si");}
+#line 771 "sintactico.tab.cc"
+    break;
+
+  case 22:
+#line 167 "sintactico.yy"
+                             {guardaBoolean("no");}
+#line 777 "sintactico.tab.cc"
+    break;
+
+  case 24:
+#line 181 "sintactico.yy"
+         { yylhs.value.as < float > () = yystack_[0].value.as < float > (); }
+#line 783 "sintactico.tab.cc"
+    break;
+
+  case 25:
+#line 183 "sintactico.yy"
         { yylhs.value.as < std::string > () = yystack_[0].value.as < std::string > ();}
-#line 629 "sintactico.tab.cc"
+#line 789 "sintactico.tab.cc"
     break;
 
-  case 36:
-#line 155 "sintactico.yy"
-                  { yylhs.value.as < float > () = yystack_[0].value.as < float > ();}
-#line 635 "sintactico.tab.cc"
+  case 26:
+#line 186 "sintactico.yy"
+                   { yylhs.value.as < float > () = yystack_[0].value.as < float > ();}
+#line 795 "sintactico.tab.cc"
+    break;
+
+  case 27:
+#line 189 "sintactico.yy"
+               {exit (-1);}
+#line 801 "sintactico.tab.cc"
     break;
 
 
-#line 639 "sintactico.tab.cc"
+#line 805 "sintactico.tab.cc"
 
             default:
               break;
@@ -906,115 +1072,106 @@ namespace yy {
   }
 
 
-  const signed char trayect_parser::yypact_ninf_ = -21;
+  const signed char trayect_parser::yypact_ninf_ = -19;
 
   const signed char trayect_parser::yytable_ninf_ = -1;
 
   const signed char
   trayect_parser::yypact_[] =
   {
-       4,    39,     7,   -10,    -9,    -8,     5,     6,    11,    52,
-      32,   -21,   -21,   -21,   -21,   -21,   -21,   -21,   -21,     1,
-       1,     1,     1,    20,     2,   -21,    34,   -21,    39,   -21,
-     -21,    36,   -21,   -21,    37,    42,    43,    40,    45,    46,
-      47,    49,    53,    51,    54,    55,     0,     1,     1,     1,
-       1,   -21,   -21,   -21,   -21,   -21,   -21,   -21,   -21,   -21,
-     -21,   -21,   -21,   -21,   -21,   -21,   -21,   -21,    56,    57,
-      58,    59,     1,     1,     1,     1,    60,    62,    63,    64,
-       1,   -21,     1,     1,    66,    67,    68,   -21,   -21,     1,
-      69,     1,    71,   -21
+       9,    -2,    13,    -4,     5,    16,    17,    18,    19,    23,
+     -19,   -19,   -19,   -19,   -19,   -19,   -19,     8,     8,     8,
+       8,     6,    -1,   -19,    -2,   -19,   -19,   -19,    20,   -19,
+     -19,    25,    26,    27,    21,    29,    31,    34,    35,    36,
+      37,    38,    40,     8,     8,     8,     8,   -19,   -19,   -19,
+     -19,   -19,   -19,   -19,   -19,   -19,    41,    42,    43,    44,
+       8,     8,     8,     8,    45,    47,    48,    49,     8,   -19,
+       8,     8,    51,    52,    53,   -19,   -19,     8,    54,     8,
+      56,   -19
   };
 
   const signed char
   trayect_parser::yydefact_[] =
   {
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
-       0,     4,     5,     6,     7,     8,     9,    10,     1,     0,
-       0,     0,     0,     0,     0,    35,     0,    34,     3,     2,
-      36,     0,    32,    33,     0,     0,     0,     0,     0,     0,
-       0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
-       0,    16,    17,    18,    19,    20,    15,    22,    23,    21,
-      24,    25,    26,    27,    28,    29,    30,    31,     0,     0,
-       0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
-       0,    13,     0,     0,     0,     0,     0,    11,    12,     0,
-       0,     0,     0,    14
+       4,     5,     6,     7,     8,     9,     1,     0,     0,     0,
+       0,     0,     0,    27,     3,     2,    26,    25,     0,    23,
+      24,     0,     0,     0,     0,     0,     0,     0,     0,     0,
+       0,     0,     0,     0,     0,     0,     0,    14,    15,    16,
+      17,    18,    19,    20,    21,    22,     0,     0,     0,     0,
+       0,     0,     0,     0,     0,     0,     0,     0,     0,    12,
+       0,     0,     0,     0,     0,    10,    11,     0,     0,     0,
+       0,    13
   };
 
   const signed char
   trayect_parser::yypgoto_[] =
   {
-     -21,   -21,    73,   -21,   -21,   -21,   -21,   -21,   -21,   -21,
-     -20,   -21,    -1,    31
+     -19,   -19,    67,   -19,   -19,   -19,   -19,   -19,   -19,   -18,
+     -19,   -19,   -19
   };
 
   const signed char
   trayect_parser::yydefgoto_[] =
   {
-      -1,     2,    28,    11,    12,    13,    14,    15,    16,    17,
-      31,    29,    32,    33
+      -1,     2,    24,    10,    11,    12,    13,    14,    15,    28,
+      29,    30,    25
   };
 
   const signed char
   trayect_parser::yytable_[] =
   {
-      34,    35,    36,    30,    30,    25,    25,    18,    26,     1,
-      19,    20,    21,    60,    61,    62,    63,    64,    65,    66,
-      43,    44,    42,    45,    25,    22,    23,    68,    69,    70,
-      71,    24,    27,    37,    38,    39,    40,    41,     3,     4,
-       5,     6,     7,     8,     9,     3,     4,     5,     6,     7,
-       8,     9,    76,    77,    78,    79,    25,    46,    47,    48,
-      84,    51,    85,    86,    49,    50,    52,    53,    54,    90,
-      55,    92,    57,    56,    10,    58,    59,    67,    72,    73,
-      74,    75,    80,    81,     0,    82,    83,    87,    88,     0,
-      89,    91,    93
+      31,    32,    33,    40,     3,     4,     5,     6,     7,     8,
+      34,    26,    27,    16,     1,    17,    41,    42,    35,    36,
+      37,    38,    39,    23,    18,    56,    57,    58,    59,     3,
+       4,     5,     6,     7,     8,    19,    20,    21,    22,     0,
+      47,    43,    64,    65,    66,    67,    44,    45,    46,    48,
+      72,    49,    73,    74,    50,    51,    52,    53,    54,    78,
+      55,    80,    60,    61,    62,    63,    68,    69,     9,    70,
+      71,    75,    76,     0,    77,    79,    81
   };
 
   const signed char
   trayect_parser::yycheck_[] =
   {
-      20,    21,    22,     3,     3,     4,     4,     0,     9,     5,
-      20,    20,    20,    13,    14,    15,    16,    17,    18,    19,
-      18,    19,    23,    24,     4,    20,    20,    47,    48,    49,
-      50,    20,     0,    13,    14,    15,    16,    17,     6,     7,
-       8,     9,    10,    11,    12,     6,     7,     8,     9,    10,
-      11,    12,    72,    73,    74,    75,     4,    23,    22,    22,
-      80,    21,    82,    83,    22,    22,    21,    21,    21,    89,
-      21,    91,    21,    20,     1,    21,    21,    46,    22,    22,
-      22,    22,    22,    21,    -1,    22,    22,    21,    21,    -1,
-      22,    22,    21
+      18,    19,    20,     4,     6,     7,     8,     9,    10,    11,
+       4,     3,     4,     0,     5,    19,    17,    18,    12,    13,
+      14,    15,    16,     0,    19,    43,    44,    45,    46,     6,
+       7,     8,     9,    10,    11,    19,    19,    19,    19,    -1,
+      19,    21,    60,    61,    62,    63,    21,    21,    21,    20,
+      68,    20,    70,    71,    20,    20,    20,    20,    20,    77,
+      20,    79,    21,    21,    21,    21,    21,    20,     1,    21,
+      21,    20,    20,    -1,    21,    21,    20
   };
 
   const signed char
   trayect_parser::yystos_[] =
   {
-       0,     5,    25,     6,     7,     8,     9,    10,    11,    12,
-      26,    27,    28,    29,    30,    31,    32,    33,     0,    20,
-      20,    20,    20,    20,    20,     4,    36,     0,    26,    35,
-       3,    34,    36,    37,    34,    34,    34,    13,    14,    15,
-      16,    17,    36,    18,    19,    36,    23,    22,    22,    22,
-      22,    21,    21,    21,    21,    21,    20,    21,    21,    21,
-      13,    14,    15,    16,    17,    18,    19,    37,    34,    34,
-      34,    34,    22,    22,    22,    22,    34,    34,    34,    34,
-      22,    21,    22,    22,    34,    34,    34,    21,    21,    22,
-      34,    22,    34,    21
+       0,     5,    24,     6,     7,     8,     9,    10,    11,    25,
+      26,    27,    28,    29,    30,    31,     0,    19,    19,    19,
+      19,    19,    19,     0,    25,    35,     3,     4,    32,    33,
+      34,    32,    32,    32,     4,    12,    13,    14,    15,    16,
+       4,    17,    18,    21,    21,    21,    21,    19,    20,    20,
+      20,    20,    20,    20,    20,    20,    32,    32,    32,    32,
+      21,    21,    21,    21,    32,    32,    32,    32,    21,    20,
+      21,    21,    32,    32,    32,    20,    20,    21,    32,    21,
+      32,    20
   };
 
   const signed char
   trayect_parser::yyr1_[] =
   {
-       0,    24,    25,    26,    26,    26,    26,    26,    26,    26,
-      26,    27,    28,    29,    30,    31,    31,    31,    31,    31,
-      31,    32,    32,    32,    33,    33,    33,    33,    33,    33,
-      33,    33,    34,    34,    35,    36,    37
+       0,    23,    24,    25,    25,    25,    25,    25,    25,    25,
+      26,    27,    28,    29,    30,    30,    30,    30,    30,    30,
+      31,    31,    31,    32,    32,    33,    34,    35
   };
 
   const signed char
   trayect_parser::yyr2_[] =
   {
        0,     2,     3,     2,     1,     1,     1,     1,     1,     1,
-       1,    10,    10,     8,    14,     4,     4,     4,     4,     4,
-       4,     4,     4,     4,     4,     4,     4,     4,     4,     4,
-       4,     4,     1,     1,     1,     1,     1
+      10,    10,     8,    14,     4,     4,     4,     4,     4,     4,
+       4,     4,     4,     1,     1,     1,     1,     1
   };
 
 
@@ -1024,22 +1181,20 @@ namespace yy {
   const char*
   const trayect_parser::yytname_[] =
   {
-  "\"eof\"", "error", "$undefined", "ENTERO", "ID", "DIBUJAR", "LINEA",
-  "REDONDO", "CUADRO", "TRIANGULO", "COLOR", "RELLENO", "ASIGNAR", "AZUL",
-  "AMARILLO", "ROJO", "VERDE", "BLANCO", "SI", "NO", "PARA", "PARC",
-  "COMA", "IGUAL", "$accept", "s", "INST", "LINEAR", "CUADROR", "REDONDOR",
-  "TRIANGULOR", "COLORR", "RELLENOR", "ASIGNARR", "E", "FINALIZAR", "var",
-  "constante", YY_NULLPTR
+  "\"eof\"", "error", "$undefined", "NUMERO", "ID", "DIBUJAR", "LINEA",
+  "REDONDO", "CUADRO", "TRIANGULO", "COLOR", "RELLENO", "AZUL", "AMARILLO",
+  "ROJO", "VERDE", "BLANCO", "SI", "NO", "PARA", "PARC", "COMA", "IGUAL",
+  "$accept", "s", "INST", "LINEAR", "CUADROR", "REDONDOR", "TRIANGULOR",
+  "COLORR", "RELLENOR", "E", "var", "constante", "FINALIZAR", YY_NULLPTR
   };
 
 #if YYDEBUG
   const unsigned char
   trayect_parser::yyrline_[] =
   {
-       0,    97,    97,   100,   101,   102,   103,   104,   105,   106,
-     107,   111,   114,   117,   120,   123,   124,   125,   126,   127,
-     128,   131,   132,   133,   136,   137,   138,   139,   140,   141,
-     142,   143,   146,   146,   149,   152,   155
+       0,   131,   131,   134,   135,   136,   137,   138,   139,   140,
+     145,   148,   151,   154,   157,   158,   159,   160,   161,   162,
+     165,   166,   167,   181,   181,   183,   186,   189
   };
 
   // Print the state stack on the debug stream.
@@ -1074,9 +1229,9 @@ namespace yy {
 
 #line 7 "sintactico.yy"
 } // yy
-#line 1078 "sintactico.tab.cc"
+#line 1233 "sintactico.tab.cc"
 
-#line 158 "sintactico.yy"
+#line 191 "sintactico.yy"
 
 
 /**********************
@@ -1085,7 +1240,121 @@ namespace yy {
 
 void yy::trayect_parser::error(const location_type& lugar, const std::string& lexema)
 {
-  std::cout << "Error Sintactico " << lexema << std::endl;
-  exit(0);
+        std::cout << "Error Sintactico " << lexema << std::endl;
+        exit(0);
   
+}
+
+/*************************
+  *Funciones *
+ *************************/
+
+ void dibujaLinea(float posx1,float posy1,float posx2,float posy2){
+
+         miniwin::linea(posx1,posy1,posx2,posy2);
+         miniwin::refresca();
+ }
+
+ void dibujaCuadro(float posx1,float posy1,float posx2,float posy2){
+         
+         if (rellenar == "si"){
+                 miniwin::rectangulo_lleno(posx1,posy1,posx2,posy2);
+                 miniwin::refresca();
+         }
+        else if (rellenar == "no"){
+                miniwin::rectangulo(posx1,posy1,posx2,posy2);
+                miniwin::refresca();
+        }
+         
+ }
+
+  void dibujaRedondo(float posx,float posy,float ratio){
+        
+         if (rellenar == "si"){
+                 miniwin::circulo_lleno( posx, posy, ratio);
+                 miniwin::refresca();
+         }
+        else if (rellenar == "no"){
+                miniwin::circulo( posx, posy, ratio);
+                miniwin::refresca();
+        }
+ }
+
+  void dibujaTriangulo(float posx1,float posy1,float posx2,float posy2,float posx3,float posy3){
+         if (rellenar == "si"){
+                 miniwin::linea(posx1,posy1,posx2,posy2);
+                 miniwin::linea(posx2,posy2,posx3,posy3);
+                 miniwin::linea(posx1,posy1,posx3,posy3);
+                 miniwin::texto(posx1,posy1, "R");
+                 miniwin::refresca();
+         }
+        else if (rellenar == "no"){
+                miniwin::linea(posx1,posy1,posx2,posy2);
+                miniwin::linea(posx2,posy2,posx3,posy3);
+                miniwin::linea(posx1,posy1,posx3,posy3);
+                miniwin::refresca();
+        }
+         
+ }
+
+void guardaColor(std::string colour ){
+        if(colour == "AMARILLO"){
+                miniwin::color(miniwin::AMARILLO);
+                miniwin::refresca();
+        }
+        else if(colour == "ROJO"){
+                miniwin::color(miniwin::ROJO);
+                miniwin::refresca();   
+        }
+        else if(colour == "VERDE"){
+                miniwin::color(miniwin::VERDE);
+                miniwin::refresca();   
+        }
+        else if(colour == "BLANCO"){
+                miniwin::color(miniwin::BLANCO);
+                miniwin::refresca();   
+        }
+
+        else if(colour =="AZUL"){
+                miniwin::color(miniwin::AZUL);
+                miniwin::refresca();    
+        }
+        
+}
+
+void guardaRelleno(std::string relleno){
+
+        if (relleno == "si"){
+                 ::rellenar = "si"; 
+                 miniwin::refresca(); 
+        }
+        else if (relleno == "no"){
+                 ::rellenar ="no";
+                 miniwin::refresca();
+        }
+}
+void guardaBoolean(std::string boolean){
+        ::rellenar = boolean;
+}
+  
+
+void guardaRojo(){
+	miniwin::color(miniwin::ROJO);
+        miniwin::refresca();
+}
+void guardaVerde(){
+	miniwin::color(miniwin::VERDE);
+        miniwin::refresca();
+}
+void guardaAzul(){
+	miniwin::color(miniwin::AZUL);
+        miniwin::refresca();
+}
+void guardaAmarillo(){
+	miniwin::color(miniwin::AMARILLO);
+        miniwin::refresca();
+}
+void guardaBlanco(){
+	miniwin::color(miniwin::BLANCO);
+        miniwin::refresca();
 }

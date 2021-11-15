@@ -62,7 +62,7 @@
   #include "string.h"
   #include "miniwin.h"
   
-  class trayect_driver;
+  class trayect_draw;
 
   extern int yylex(void);
   extern char *yytext;
@@ -70,9 +70,28 @@
 
   //Declaracion de metodos 
   void yyerror(char *s);
+  void dibujaLinea(float posx1,float posy1,float posx2,float posy2);
+  void dibujaCuadro(float posx1,float posy1,float posx2,float posy2);
+  void dibujaRedondo(float posx,float posy , float ratio);
+  void dibujaTriangulo(float posx1,float posy1,float posx2,float posy2,float posx3,float posy3);
+  void guardaColor(std::string colour);
+  void guardaAzul();
+  void guardaAmarillo();
+  void guardaBlanco();
+  void guardaRojo();
+  void guardaVerde();
+  void guardaRelleno(std::string relleno);
+  void guardaBoolean(std::string boolean);
+  void asignaAzul(std::string azul);
+  void asignaAmarillo(std::string amarillo);
+  void asignaBlanco(std::string blanco);
+  void asignaRojo(std::string rojo);
+  void asignaVerde(std::string verde);
+  void asignaSi();
+  void asignaNo();
+  void asignaConstante();
 
-
-#line 76 "sintactico.tab.hh"
+#line 95 "sintactico.tab.hh"
 
 # include <cassert>
 # include <cstdlib> // std::abort
@@ -207,7 +226,7 @@
 
 #line 7 "sintactico.yy"
 namespace yy {
-#line 211 "sintactico.tab.hh"
+#line 230 "sintactico.tab.hh"
 
 
 
@@ -411,7 +430,15 @@ namespace yy {
     /// An auxiliary type to compute the largest semantic type.
     union union_type
     {
-      // ENTERO
+      // NUMERO
+      // INST
+      // LINEAR
+      // CUADROR
+      // REDONDOR
+      // TRIANGULOR
+      // COLORR
+      // RELLENOR
+      // E
       // constante
       char dummy1[sizeof (float)];
 
@@ -466,7 +493,7 @@ namespace yy {
       enum yytokentype
       {
         TOKFIN = 0,
-        TOKENTERO = 258,
+        TOKNUMERO = 258,
         TOKID = 259,
         TOKDIBUJAR = 260,
         TOKLINEA = 261,
@@ -475,18 +502,17 @@ namespace yy {
         TOKTRIANGULO = 264,
         TOKCOLOR = 265,
         TOKRELLENO = 266,
-        TOKASIGNAR = 267,
-        TOKAZUL = 268,
-        TOKAMARILLO = 269,
-        TOKROJO = 270,
-        TOKVERDE = 271,
-        TOKBLANCO = 272,
-        TOKSI = 273,
-        TOKNO = 274,
-        TOKPARA = 275,
-        TOKPARC = 276,
-        TOKCOMA = 277,
-        TOKIGUAL = 278
+        TOKAZUL = 267,
+        TOKAMARILLO = 268,
+        TOKROJO = 269,
+        TOKVERDE = 270,
+        TOKBLANCO = 271,
+        TOKSI = 272,
+        TOKNO = 273,
+        TOKPARA = 274,
+        TOKPARC = 275,
+        TOKCOMA = 276,
+        TOKIGUAL = 277
       };
     };
 
@@ -589,13 +615,21 @@ namespace yy {
         // Type destructor.
 switch (yytype)
     {
-      case 3: // ENTERO
-      case 37: // constante
+      case 3: // NUMERO
+      case 25: // INST
+      case 26: // LINEAR
+      case 27: // CUADROR
+      case 28: // REDONDOR
+      case 29: // TRIANGULOR
+      case 30: // COLORR
+      case 31: // RELLENOR
+      case 32: // E
+      case 34: // constante
         value.template destroy< float > ();
         break;
 
       case 4: // ID
-      case 36: // var
+      case 33: // var
         value.template destroy< std::string > ();
         break;
 
@@ -675,26 +709,26 @@ switch (yytype)
       symbol_type (int tok, location_type l)
         : super_type(token_type (tok), std::move (l))
       {
-        YY_ASSERT (tok == token::TOKFIN || tok == token::TOKDIBUJAR || tok == token::TOKLINEA || tok == token::TOKREDONDO || tok == token::TOKCUADRO || tok == token::TOKTRIANGULO || tok == token::TOKCOLOR || tok == token::TOKRELLENO || tok == token::TOKASIGNAR || tok == token::TOKAZUL || tok == token::TOKAMARILLO || tok == token::TOKROJO || tok == token::TOKVERDE || tok == token::TOKBLANCO || tok == token::TOKSI || tok == token::TOKNO || tok == token::TOKPARA || tok == token::TOKPARC || tok == token::TOKCOMA || tok == token::TOKIGUAL);
+        YY_ASSERT (tok == token::TOKFIN || tok == token::TOKDIBUJAR || tok == token::TOKLINEA || tok == token::TOKREDONDO || tok == token::TOKCUADRO || tok == token::TOKTRIANGULO || tok == token::TOKCOLOR || tok == token::TOKRELLENO || tok == token::TOKAZUL || tok == token::TOKAMARILLO || tok == token::TOKROJO || tok == token::TOKVERDE || tok == token::TOKBLANCO || tok == token::TOKSI || tok == token::TOKNO || tok == token::TOKPARA || tok == token::TOKPARC || tok == token::TOKCOMA || tok == token::TOKIGUAL);
       }
 #else
       symbol_type (int tok, const location_type& l)
         : super_type(token_type (tok), l)
       {
-        YY_ASSERT (tok == token::TOKFIN || tok == token::TOKDIBUJAR || tok == token::TOKLINEA || tok == token::TOKREDONDO || tok == token::TOKCUADRO || tok == token::TOKTRIANGULO || tok == token::TOKCOLOR || tok == token::TOKRELLENO || tok == token::TOKASIGNAR || tok == token::TOKAZUL || tok == token::TOKAMARILLO || tok == token::TOKROJO || tok == token::TOKVERDE || tok == token::TOKBLANCO || tok == token::TOKSI || tok == token::TOKNO || tok == token::TOKPARA || tok == token::TOKPARC || tok == token::TOKCOMA || tok == token::TOKIGUAL);
+        YY_ASSERT (tok == token::TOKFIN || tok == token::TOKDIBUJAR || tok == token::TOKLINEA || tok == token::TOKREDONDO || tok == token::TOKCUADRO || tok == token::TOKTRIANGULO || tok == token::TOKCOLOR || tok == token::TOKRELLENO || tok == token::TOKAZUL || tok == token::TOKAMARILLO || tok == token::TOKROJO || tok == token::TOKVERDE || tok == token::TOKBLANCO || tok == token::TOKSI || tok == token::TOKNO || tok == token::TOKPARA || tok == token::TOKPARC || tok == token::TOKCOMA || tok == token::TOKIGUAL);
       }
 #endif
 #if 201103L <= YY_CPLUSPLUS
       symbol_type (int tok, float v, location_type l)
         : super_type(token_type (tok), std::move (v), std::move (l))
       {
-        YY_ASSERT (tok == token::TOKENTERO);
+        YY_ASSERT (tok == token::TOKNUMERO);
       }
 #else
       symbol_type (int tok, const float& v, const location_type& l)
         : super_type(token_type (tok), v, l)
       {
-        YY_ASSERT (tok == token::TOKENTERO);
+        YY_ASSERT (tok == token::TOKNUMERO);
       }
 #endif
 #if 201103L <= YY_CPLUSPLUS
@@ -713,7 +747,7 @@ switch (yytype)
     };
 
     /// Build a parser object.
-    trayect_parser (trayect_driver& driver_yyarg);
+    trayect_parser (trayect_draw& draw_yyarg);
     virtual ~trayect_parser ();
 
     /// Parse.  An alias for parse ().
@@ -765,16 +799,16 @@ switch (yytype)
 #if 201103L <= YY_CPLUSPLUS
       static
       symbol_type
-      make_ENTERO (float v, location_type l)
+      make_NUMERO (float v, location_type l)
       {
-        return symbol_type (token::TOKENTERO, std::move (v), std::move (l));
+        return symbol_type (token::TOKNUMERO, std::move (v), std::move (l));
       }
 #else
       static
       symbol_type
-      make_ENTERO (const float& v, const location_type& l)
+      make_NUMERO (const float& v, const location_type& l)
       {
-        return symbol_type (token::TOKENTERO, v, l);
+        return symbol_type (token::TOKNUMERO, v, l);
       }
 #endif
 #if 201103L <= YY_CPLUSPLUS
@@ -895,21 +929,6 @@ switch (yytype)
       make_RELLENO (const location_type& l)
       {
         return symbol_type (token::TOKRELLENO, l);
-      }
-#endif
-#if 201103L <= YY_CPLUSPLUS
-      static
-      symbol_type
-      make_ASIGNAR (location_type l)
-      {
-        return symbol_type (token::TOKASIGNAR, std::move (l));
-      }
-#else
-      static
-      symbol_type
-      make_ASIGNAR (const location_type& l)
-      {
-        return symbol_type (token::TOKASIGNAR, l);
       }
 #endif
 #if 201103L <= YY_CPLUSPLUS
@@ -1383,15 +1402,15 @@ switch (yytype)
     enum
     {
       yyeof_ = 0,
-      yylast_ = 92,     ///< Last index in yytable_.
-      yynnts_ = 14,  ///< Number of nonterminal symbols.
-      yyfinal_ = 18, ///< Termination state number.
-      yyntokens_ = 24  ///< Number of tokens.
+      yylast_ = 76,     ///< Last index in yytable_.
+      yynnts_ = 13,  ///< Number of nonterminal symbols.
+      yyfinal_ = 16, ///< Termination state number.
+      yyntokens_ = 23  ///< Number of tokens.
     };
 
 
     // User arguments.
-    trayect_driver& driver;
+    trayect_draw& draw;
   };
 
   inline
@@ -1431,9 +1450,9 @@ switch (yytype)
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     1,     2,     3,     4,
        5,     6,     7,     8,     9,    10,    11,    12,    13,    14,
-      15,    16,    17,    18,    19,    20,    21,    22,    23
+      15,    16,    17,    18,    19,    20,    21,    22
     };
-    const int user_token_number_max_ = 278;
+    const int user_token_number_max_ = 277;
 
     if (t <= 0)
       return yyeof_;
@@ -1453,13 +1472,21 @@ switch (yytype)
   {
     switch (this->type_get ())
     {
-      case 3: // ENTERO
-      case 37: // constante
+      case 3: // NUMERO
+      case 25: // INST
+      case 26: // LINEAR
+      case 27: // CUADROR
+      case 28: // REDONDOR
+      case 29: // TRIANGULOR
+      case 30: // COLORR
+      case 31: // RELLENOR
+      case 32: // E
+      case 34: // constante
         value.move< float > (std::move (that.value));
         break;
 
       case 4: // ID
-      case 36: // var
+      case 33: // var
         value.move< std::string > (std::move (that.value));
         break;
 
@@ -1478,13 +1505,21 @@ switch (yytype)
   {
     switch (this->type_get ())
     {
-      case 3: // ENTERO
-      case 37: // constante
+      case 3: // NUMERO
+      case 25: // INST
+      case 26: // LINEAR
+      case 27: // CUADROR
+      case 28: // REDONDOR
+      case 29: // TRIANGULOR
+      case 30: // COLORR
+      case 31: // RELLENOR
+      case 32: // E
+      case 34: // constante
         value.copy< float > (YY_MOVE (that.value));
         break;
 
       case 4: // ID
-      case 36: // var
+      case 33: // var
         value.copy< std::string > (YY_MOVE (that.value));
         break;
 
@@ -1510,13 +1545,21 @@ switch (yytype)
     super_type::move (s);
     switch (this->type_get ())
     {
-      case 3: // ENTERO
-      case 37: // constante
+      case 3: // NUMERO
+      case 25: // INST
+      case 26: // LINEAR
+      case 27: // CUADROR
+      case 28: // REDONDOR
+      case 29: // TRIANGULOR
+      case 30: // COLORR
+      case 31: // RELLENOR
+      case 32: // E
+      case 34: // constante
         value.move< float > (YY_MOVE (s.value));
         break;
 
       case 4: // ID
-      case 36: // var
+      case 33: // var
         value.move< std::string > (YY_MOVE (s.value));
         break;
 
@@ -1576,7 +1619,7 @@ switch (yytype)
 
 #line 7 "sintactico.yy"
 } // yy
-#line 1580 "sintactico.tab.hh"
+#line 1623 "sintactico.tab.hh"
 
 
 
